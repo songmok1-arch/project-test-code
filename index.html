@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>조코딩 JoCoding</title>
+  <meta name="description" content="누구나 쉽게 배우는 코딩 - 조코딩 JoCoding" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f5f7fb;
+      --text: #1a1d24;
+      --text-muted: #5b6270;
+      --primary: #ff3b3b;
+      --primary-dark: #d92525;
+      --card: #ffffff;
+      --border: #e4e7ee;
+      --shadow: 0 8px 24px rgba(20, 30, 60, 0.08);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111318;
+        --bg-soft: #181b22;
+        --text: #eef0f4;
+        --text-muted: #a3a9b6;
+        --card: #1c2029;
+        --border: #2a2f3a;
+        --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Noto Sans KR", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+    /* 헤더 */
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { font-size: 1.4rem; font-weight: 900; }
+    .logo span { color: var(--primary); }
+    .nav ul { display: flex; gap: 28px; list-style: none; }
+    .nav ul a { color: var(--text-muted); font-weight: 500; transition: color .2s; }
+    .nav ul a:hover { color: var(--primary); }
+    .menu-btn { display: none; background: none; border: 0; font-size: 1.6rem; color: var(--text); cursor: pointer; }
+
+    /* 히어로 */
+    .hero { padding: 110px 0 90px; text-align: center; background: linear-gradient(180deg, var(--bg-soft), var(--bg)); }
+    .badge {
+      display: inline-block; padding: 6px 14px; border-radius: 999px;
+      background: color-mix(in srgb, var(--primary) 12%, transparent);
+      color: var(--primary); font-weight: 700; font-size: .9rem; margin-bottom: 20px;
+    }
+    .hero h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); font-weight: 900; line-height: 1.25; margin-bottom: 20px; }
+    .hero h1 em { font-style: normal; color: var(--primary); }
+    .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 620px; margin: 0 auto 36px; }
+    .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 12px; font-weight: 700;
+      transition: transform .15s, background .2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-outline { border: 2px solid var(--border); }
+
+    /* 섹션 공통 */
+    section { padding: 90px 0; }
+    .section-title { text-align: center; margin-bottom: 50px; }
+    .section-title h2 { font-size: 2rem; font-weight: 900; margin-bottom: 10px; }
+    .section-title p { color: var(--text-muted); }
+
+    /* 소개 */
+    .about-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .feature {
+      background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+      padding: 32px 26px; box-shadow: var(--shadow);
+    }
+    .feature .icon { font-size: 2.2rem; margin-bottom: 14px; }
+    .feature h3 { font-size: 1.2rem; margin-bottom: 8px; }
+    .feature p { color: var(--text-muted); font-size: .95rem; }
+
+    /* 강의 */
+    #courses { background: var(--bg-soft); }
+    .course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 22px; }
+    .course {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      overflow: hidden; transition: transform .2s, box-shadow .2s;
+    }
+    .course:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .thumb { height: 130px; display: grid; place-items: center; font-size: 3rem; }
+    .course-body { padding: 20px; }
+    .tag { font-size: .78rem; font-weight: 700; color: var(--primary); }
+    .course h3 { font-size: 1.08rem; margin: 6px 0; }
+    .course p { color: var(--text-muted); font-size: .9rem; }
+
+    /* CTA */
+    .cta {
+      background: linear-gradient(135deg, var(--primary), #ff7a45);
+      color: #fff; border-radius: 24px; padding: 60px 30px; text-align: center;
+    }
+    .cta h2 { font-size: 2rem; font-weight: 900; margin-bottom: 12px; }
+    .cta p { opacity: .9; margin-bottom: 28px; }
+    .cta .btn { background: #fff; color: var(--primary); }
+
+    /* 푸터 */
+    footer { border-top: 1px solid var(--border); padding: 40px 0; color: var(--text-muted); font-size: .9rem; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .socials { display: flex; gap: 18px; }
+    .socials a:hover { color: var(--primary); }
+
+    /* 반응형 */
+    @media (max-width: 768px) {
+      .menu-btn { display: block; }
+      .nav ul {
+        display: none; position: absolute; top: 64px; left: 0; right: 0;
+        flex-direction: column; gap: 0; background: var(--bg); border-bottom: 1px solid var(--border);
+      }
+      .nav ul.open { display: flex; }
+      .nav ul li a { display: block; padding: 14px 20px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .hero { padding: 80px 0 60px; }
+      section { padding: 64px 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#" class="logo">조<span>코딩</span></a>
+      <button class="menu-btn" aria-label="메뉴 열기" onclick="document.querySelector('.nav ul').classList.toggle('open')">☰</button>
+      <ul>
+        <li><a href="#about">소개</a></li>
+        <li><a href="#courses">강의</a></li>
+        <li><a href="#contact">문의</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="badge">👨‍💻 코딩 입문자를 위한 채널</span>
+        <h1>누구나 쉽게 배우는<br /><em>조코딩</em>과 함께 코딩 시작!</h1>
+        <p>어렵게만 느껴졌던 코딩, 이제 쉽고 재미있게 배워보세요. 웹 개발부터 앱, AI까지 직접 만들어보며 익힙니다.</p>
+        <div class="btns">
+          <a class="btn btn-primary" href="https://www.youtube.com/@jocoding" target="_blank" rel="noopener">▶ 유튜브 보러가기</a>
+          <a class="btn btn-outline" href="#courses">강의 둘러보기</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-title">
+          <h2>왜 조코딩인가요?</h2>
+          <p>비전공자도 따라할 수 있는 실전 코딩 교육</p>
+        </div>
+        <div class="about-grid">
+          <div class="feature">
+            <div class="icon">🎯</div>
+            <h3>쉬운 설명</h3>
+            <p>전문 용어 대신 쉬운 말로, 처음 배우는 사람의 눈높이에서 설명합니다.</p>
+          </div>
+          <div class="feature">
+            <div class="icon">🛠️</div>
+            <h3>실전 프로젝트</h3>
+            <p>이론보다 직접 만들어보기! 완성된 결과물을 손에 쥐며 배웁니다.</p>
+          </div>
+          <div class="feature">
+            <div class="icon">🚀</div>
+            <h3>최신 기술</h3>
+            <p>AI, 자동화 등 지금 가장 핫한 기술을 빠르게 소개합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="courses">
+      <div class="container">
+        <div class="section-title">
+          <h2>인기 강의</h2>
+          <p>관심 있는 분야부터 시작해보세요</p>
+        </div>
+        <div class="course-grid">
+          <a class="course" href="#">
+            <div class="thumb" style="background:#ffe3e3">🌐</div>
+            <div class="course-body">
+              <span class="tag">웹 개발</span>
+              <h3>HTML/CSS/JS 입문</h3>
+              <p>나만의 첫 웹사이트를 만들어 배포까지 해봅니다.</p>
+            </div>
+          </a>
+          <a class="course" href="#">
+            <div class="thumb" style="background:#e3f0ff">📱</div>
+            <div class="course-body">
+              <span class="tag">앱 개발</span>
+              <h3>앱 만들기 기초</h3>
+              <p>코딩 몰라도 따라하는 모바일 앱 제작.</p>
+            </div>
+          </a>
+          <a class="course" href="#">
+            <div class="thumb" style="background:#e6f9ea">🤖</div>
+            <div class="course-body">
+              <span class="tag">AI</span>
+              <h3>AI 활용 코딩</h3>
+              <p>AI 도구로 아이디어를 빠르게 서비스로 만듭니다.</p>
+            </div>
+          </a>
+          <a class="course" href="#">
+            <div class="thumb" style="background:#fff4d6">🐍</div>
+            <div class="course-body">
+              <span class="tag">파이썬</span>
+              <h3>파이썬 자동화</h3>
+              <p>반복 업무를 코드로 자동화하는 방법.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="cta">
+          <h2>지금 바로 코딩을 시작하세요!</h2>
+          <p>구독하고 새로운 강의 소식을 가장 먼저 받아보세요.</p>
+          <a class="btn" href="https://www.youtube.com/@jocoding" target="_blank" rel="noopener">구독하러 가기 →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> 조코딩 JoCoding. All rights reserved.</p>
+      <div class="socials">
+        <a href="https://www.youtube.com/@jocoding" target="_blank" rel="noopener">YouTube</a>
+        <a href="#">Instagram</a>
+        <a href="mailto:contact@example.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.querySelectorAll('.nav ul a').forEach(a =>
+      a.addEventListener('click', () => document.querySelector('.nav ul').classList.remove('open'))
+    );
+  </script>
+</body>
+</html>
